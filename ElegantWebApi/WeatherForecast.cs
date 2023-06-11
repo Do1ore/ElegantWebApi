@@ -1,4 +1,4 @@
-namespace ElegantWebApi
+namespace ElegantWebApi.Api
 {
     public class WeatherForecast
     {

@@ -3,11 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantWebApi", "ElegantWebApi\ElegantWebApi.csproj", "{894AECEC-C9E5-46FC-BE18-E575E8BA3BEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Api", "ElegantWebApi\ElegantWebApi.Api.csproj", "{894AECEC-C9E5-46FC-BE18-E575E8BA3BEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8538F6CE-1874-473A-A090-DD4B4A67329E} = {8538F6CE-1874-473A-A090-DD4B4A67329E}
+		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0} = {BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantWebApi.Domain", "ElegantWebApi.Domain\ElegantWebApi.Domain.csproj", "{272FB8FA-77F7-4D52-8898-56CC99147050}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Domain", "ElegantWebApi.Domain\ElegantWebApi.Domain.csproj", "{272FB8FA-77F7-4D52-8898-56CC99147050}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantWebApi.Infrastructure", "ElegantWebApi.Infrastructure\ElegantWebApi.Infrastructure.csproj", "{8538F6CE-1874-473A-A090-DD4B4A67329E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Infrastructure", "ElegantWebApi.Infrastructure\ElegantWebApi.Infrastructure.csproj", "{8538F6CE-1874-473A-A090-DD4B4A67329E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{272FB8FA-77F7-4D52-8898-56CC99147050} = {272FB8FA-77F7-4D52-8898-56CC99147050}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Application", "ElegantWebApi.Appication\ElegantWebApi.Application.csproj", "{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +36,10 @@ Global
 		{8538F6CE-1874-473A-A090-DD4B4A67329E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8538F6CE-1874-473A-A090-DD4B4A67329E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8538F6CE-1874-473A-A090-DD4B4A67329E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

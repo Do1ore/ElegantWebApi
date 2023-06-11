@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ElegantWebApi.Controllers
+namespace ElegantWebApi.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
