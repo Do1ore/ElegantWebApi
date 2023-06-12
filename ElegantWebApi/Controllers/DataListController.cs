@@ -27,7 +27,7 @@ namespace ElegantWebApi.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddKeyValuePair([FromBody] DataListModel value)
         {
-            var command = new AddDataListCommand();
+            var command = new AddDataListCommand(value);
             var result = await _mediator.Send(command);
             return Ok(result);
 

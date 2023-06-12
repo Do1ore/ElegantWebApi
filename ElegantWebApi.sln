@@ -17,6 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Infrastructur
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Application", "ElegantWebApi.Appication\ElegantWebApi.Application.csproj", "{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8538F6CE-1874-473A-A090-DD4B4A67329E} = {8538F6CE-1874-473A-A090-DD4B4A67329E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

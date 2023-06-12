@@ -1,6 +1,7 @@
 ﻿
 using ElegantWebApi.Domain.Entities;
 using MediatR;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ElegantWebApi.Application.Features.AddDataList
 {
@@ -8,7 +9,7 @@ namespace ElegantWebApi.Application.Features.AddDataList
     {
         public Task<DataListModel> Handle(AddDataListCommand request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new DataListModel());
+            return Task.FromResult(request._listModel!);
         }
     }
 }
