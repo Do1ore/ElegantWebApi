@@ -13,11 +13,13 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjectionFixed" Version="5.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.4.23260.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ElegantWebApi.Appication\ElegantWebApi.Application.csproj" />
     <ProjectReference Include="..\ElegantWebApi.Domain\ElegantWebApi.Domain.csproj" />
+    <ProjectReference Include="..\ElegantWebApi.Infrastructure\ElegantWebApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

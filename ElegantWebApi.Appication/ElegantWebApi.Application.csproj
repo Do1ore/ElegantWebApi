@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
     <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ElegantWebApi.Domain\ElegantWebApi.Domain.csproj" />
+    <ProjectReference Include="..\ElegantWebApi.Infrastructure\ElegantWebApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

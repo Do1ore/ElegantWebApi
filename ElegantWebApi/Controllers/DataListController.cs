@@ -1,12 +1,11 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
 using ElegantWebApi.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElegantWebApi.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class DataListController : ControllerBase
     {
@@ -27,8 +26,7 @@ namespace ElegantWebApi.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddKeyValuePair([FromBody] DataListModel value)
         {
-            var command = new AddDataListCommand(value);
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(new AddDataListCommand(value));
             return Ok(result);
 
         }

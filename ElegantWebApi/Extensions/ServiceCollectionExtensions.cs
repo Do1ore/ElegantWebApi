@@ -1,4 +1,9 @@
-﻿using MediatR;
+﻿using ElegantWebApi.Application.Features.AddDataList;
+using ElegantWebApi.Infrastructure;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Concurrent;
 
 namespace ElegantWebApi.Api.Extensions
 {
@@ -8,6 +13,18 @@ namespace ElegantWebApi.Api.Extensions
         {
             services.AddMediatR(typeof(Application.Features.AddDataList.AddDataListHandler).Assembly);
 
+            return services;
+        }
+
+        public static IServiceCollection SetupValidationForCommands(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<AddDataListCommand>, AddDataListCommandValidator>();
+            return services;
+        }
+
+        public static IServiceCollection SetupCustomHostedService(this IServiceCollection services)
+        {
+            services.AddHostedService<IConcurrentDictionaryHostedService>();
             return services;
         }
     }

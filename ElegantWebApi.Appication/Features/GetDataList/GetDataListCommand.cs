@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ElegantWebApi.Domain.Entities;
+using MediatR;
 
 namespace ElegantWebApi.Application.Features.GetDataList
 {
-    internal class GetDataListCommand
+    public class GetDataListCommand : IRequest<DataListModel>
     {
+        public string Id { get; }
+
+        public GetDataListCommand(string id)
+        {
+            Id = id;
+        }
     }
 }
