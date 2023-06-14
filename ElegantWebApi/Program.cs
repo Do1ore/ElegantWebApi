@@ -1,5 +1,6 @@
 using ElegantWebApi.Api.Extensions;
-using ElegantWebApi.Infrastructure;
+using ElegantWebApi.Infrastructure.Contracts;
+using ElegantWebApi.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddMemoryCache();
 builder.Services.SetupMediatR();
 builder.Services.SetupValidationForCommands();
 
+builder.Services.AddSingleton<IConcurrentDictionaryService, ConcurrentDictionaryService>();
 builder.Services.SetupCustomHostedService();
 var app = builder.Build();
 
@@ -27,6 +29,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapGet("/", () => {});
+app.MapGet("/", () => { });
 app.Run();
 

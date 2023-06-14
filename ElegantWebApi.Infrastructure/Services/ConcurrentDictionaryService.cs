@@ -1,28 +1,22 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ElegantWebApi.Infrastructure
+namespace ElegantWebApi.Infrastructure.Services
 {
-    public class ConcurrentDictionaryHostedService : IConcurrentDictionaryHostedService
+    public class ConcurrentDictionaryService : IConcurrentDictionaryService
     {
         private ConcurrentDictionary<string, List<object>> _dictionary;
 
-        public ConcurrentDictionaryHostedService()
+        public ConcurrentDictionaryService()
         {
             _dictionary = new ConcurrentDictionary<string, List<object>>();
         }
-
-
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
 
         public Task Create(string key, List<object> list)
         {
@@ -68,6 +62,5 @@ namespace ElegantWebApi.Infrastructure
             }
             return Task.FromResult(new List<object>());
         }
-
     }
 }
