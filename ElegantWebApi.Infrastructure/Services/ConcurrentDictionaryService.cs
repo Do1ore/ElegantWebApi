@@ -6,7 +6,7 @@ namespace ElegantWebApi.Infrastructure.Services
     public class ConcurrentDictionaryService : IConcurrentDictionaryService
     {
         private ConcurrentDictionary<string, List<object>> _dictionary;
-
+       
         public ConcurrentDictionaryService()
         {
             _dictionary = new ConcurrentDictionary<string, List<object>>();

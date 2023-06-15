@@ -1,6 +1,4 @@
 using ElegantWebApi.Api.Extensions;
-using ElegantWebApi.Infrastructure.Contracts;
-using ElegantWebApi.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +12,8 @@ builder.Services.AddMemoryCache();
 
 builder.Services.SetupMediatR();
 builder.Services.SetupValidationForCommands();
-
-builder.Services.AddSingleton<IConcurrentDictionaryService, ConcurrentDictionaryService>();
 builder.Services.SetupCustomHostedService();
+builder.Services.SetupDictionaryService();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
