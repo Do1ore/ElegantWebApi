@@ -4,6 +4,7 @@ using ElegantWebApi.Infrastructure;
 using ElegantWebApi.Infrastructure.Contracts;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 
 namespace ElegantWebApi.Application.Features.AddDataList
 {
@@ -13,7 +14,10 @@ namespace ElegantWebApi.Application.Features.AddDataList
         private readonly IValidator<AddDataListCommand> _validator;
         private readonly IConcurrentDictionaryService _dictionaryService;
         private readonly IExprirationDataService _exprirationDataService;
-        public AddDataListHandler(IValidator<AddDataListCommand> validator, IConcurrentDictionaryService dictionaryService, IExprirationDataService exprirationDataService)
+        public AddDataListHandler(
+            IValidator<AddDataListCommand> validator,
+            IConcurrentDictionaryService dictionaryService,
+            IExprirationDataService exprirationDataService)
         {
             _validator = validator;
             _dictionaryService = dictionaryService;
@@ -30,9 +34,14 @@ namespace ElegantWebApi.Application.Features.AddDataList
                 throw new ValidationException(validationResult.Errors);
             }
 
-            await _dictionaryService.Create(request.listModel!.Id.ToString(), request.listModel.Values!);
+            await _dictionaryService
+                .CreateAsync(request.ListModel!.Id.ToString(), request.ListModel.Values!);
 
-            return request.listModel!;
+            await _exprirationDataService
+                .AddExpirationTimeAsync(request.ListModel!.Id.ToString(), request.ListModel!.ExpirationTime);
+
+
+            return request.ListModel!;
         }
     }
 }

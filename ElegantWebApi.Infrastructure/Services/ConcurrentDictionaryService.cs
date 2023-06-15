@@ -12,7 +12,7 @@ namespace ElegantWebApi.Infrastructure.Services
             _dictionary = new ConcurrentDictionary<string, List<object>>();
         }
 
-        public Task Create(string key, List<object> list)
+        public Task CreateAsync(string key, List<object> list)
         {
             if (!_dictionary.TryAdd(key, list))
             {
@@ -21,7 +21,7 @@ namespace ElegantWebApi.Infrastructure.Services
             return Task.CompletedTask;
         }
 
-        public Task Append(string key, object value)
+        public Task AppendAsync(string key, object value)
         {
             if (_dictionary.TryGetValue(key, out List<object>? list))
             {
@@ -29,12 +29,12 @@ namespace ElegantWebApi.Infrastructure.Services
             }
             else
             {
-                Create(key, new List<object>() { value });
+                CreateAsync(key, new List<object>() { value });
             }
             return Task.CompletedTask;
         }
 
-        public Task<List<object>> Get(string key)
+        public Task<List<object>> GetAsync(string key)
         {
            
             if (_dictionary.TryGetValue(key, out List<object>? list))
@@ -49,7 +49,7 @@ namespace ElegantWebApi.Infrastructure.Services
 
         }
 
-        public Task<List<object>> Delete(string id)
+        public Task<List<object>> DeleteAsync(string id)
         {
             if (_dictionary.TryRemove(id, out List<object>? list))
             {

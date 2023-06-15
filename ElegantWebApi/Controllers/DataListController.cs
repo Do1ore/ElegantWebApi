@@ -1,5 +1,7 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
+using ElegantWebApi.Application.Features.DeleteDataList;
 using ElegantWebApi.Application.Features.GetDataList;
+using ElegantWebApi.Application.Features.UpdateDataList;
 using ElegantWebApi.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,15 +36,17 @@ namespace ElegantWebApi.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateKeyValuePair()
+        public async Task<IActionResult> UpdateKeyValuePair([FromBody] SingleDataModel value)
         {
-            return Ok();
+            await _mediator.Send(new AppendValueCommand(value));
+            return Ok(value);
         }
 
-        [HttpDelete]
-        public IActionResult DeleteKeyValuePair()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteKeyValuePairAsync([AsParameters] string id)
         {
-            return Ok();
+            var result = await _mediator.Send(new DeleteRecordListCommand(id));
+            return Ok(result);
         }
     }
 }

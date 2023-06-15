@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ElegantWebApi.Infrastructure.Services
 {
@@ -12,6 +13,7 @@ namespace ElegantWebApi.Infrastructure.Services
         private readonly int _checkIntervalInSeconds;
         private readonly IConcurrentDictionaryService _dictionaryService;
         private readonly IExprirationDataService _exprirationDataService;
+        private int _expiredCounter = 0;
         public ConcurrentDictionaryHostedService(
             ILogger<ConcurrentDictionaryHostedService> logger,
             IConfiguration configuration,
@@ -38,12 +40,29 @@ namespace ElegantWebApi.Infrastructure.Services
                     {
                         if (keyDateTiemePair.Value <= DateTime.Now)
                         {
-                            await _dictionaryService.Delete(keyDateTiemePair.Key);
-                            _logger.LogInformation($"Record with id: {keyDateTiemePair.Key} erased. Expired");
-                        }
-                    }
-                    await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
+                            var result = await _dictionaryService.DeleteAsync(keyDateTiemePair.Key);
+                            if (result != null)
+                            {
+                                _expiredCounter++;
+                                _logger.LogInformation($"Record with id: {keyDateTiemePair.Key} erased. Expired");
+                            }
+                            else
+                            {
+                                _logger.LogError($"Error while deleting: {keyDateTiemePair.Key}");
 
+                            }
+                        }
+                        _expiredCounter = 0;
+
+                    }
+                    _logger.LogInformation($"{DateTime.Now.ToShortTimeString()}: Expired: {_expiredCounter}");
+                    List<string> info = new();
+                    foreach (var item in await _exprirationDataService.GetAllAsync())
+                    {
+                        info.Add(item.Key + ": " + item.Value);
+                    }
+                    _logger.LogInformation($"Expiration info: \n{string.Join(", ", info)}");
+                    await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
                 }
             }
             catch (TaskCanceledException)

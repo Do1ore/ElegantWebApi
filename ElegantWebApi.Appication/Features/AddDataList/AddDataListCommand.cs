@@ -6,11 +6,11 @@ namespace ElegantWebApi.Application.Features.AddDataList
 {
     public class AddDataListCommand : IRequest<DataListModel>
     {
-        public DataListModel? listModel { get; }
+        public DataListModel? ListModel { get; }
 
         public AddDataListCommand(DataListModel? listModel)
         {
-            this.listModel = listModel;
+            this.ListModel = listModel;
         }
     }
 }

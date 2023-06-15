@@ -15,7 +15,7 @@ namespace ElegantWebApi.Application.Features.GetDataList
 
         public async Task<DataListModel> Handle(GetDataListCommand request, CancellationToken cancellationToken)
         {
-            var valuesList = await _dictionaryService.Get(request.Id);
+            var valuesList = await _dictionaryService.GetAsync(request.Id);
             DataListModel model = new DataListModel()
             {
                 Id = Guid.Parse(request.Id),

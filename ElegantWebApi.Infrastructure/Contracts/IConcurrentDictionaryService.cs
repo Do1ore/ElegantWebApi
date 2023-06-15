@@ -5,9 +5,9 @@ namespace ElegantWebApi.Infrastructure.Contracts
     public interface IConcurrentDictionaryService
     {
 
-        Task Append(string key, object value);
-        Task Create(string key, List<object> list);
-        Task<List<object>> Delete(string id);
-        Task<List<object>> Get(string key);
+        Task AppendAsync(string key, object value);
+        Task CreateAsync(string key, List<object> list);
+        Task<List<object>> DeleteAsync(string id);
+        Task<List<object>> GetAsync(string key);
     }
 }

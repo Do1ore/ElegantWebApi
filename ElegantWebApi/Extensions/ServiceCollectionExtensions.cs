@@ -1,11 +1,11 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
-using ElegantWebApi.Infrastructure;
+using ElegantWebApi.Application.Features.AppendValue;
+using ElegantWebApi.Application.Features.DeleteDataList;
+using ElegantWebApi.Application.Features.UpdateDataList;
 using ElegantWebApi.Infrastructure.Contracts;
 using ElegantWebApi.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Concurrent;
 
 namespace ElegantWebApi.Api.Extensions
 {
@@ -21,6 +21,9 @@ namespace ElegantWebApi.Api.Extensions
         public static IServiceCollection SetupValidationForCommands(this IServiceCollection services)
         {
             services.AddTransient<IValidator<AddDataListCommand>, AddDataListCommandValidator>();
+            services.AddTransient<IValidator<AppendValueCommand>, AppendValueCommandValidator>();
+            services.AddTransient<IValidator<DeleteRecordListCommand>, DeleteRecordCommandValidator>();
+
             return services;
         }
         public static IServiceCollection SetupDictionaryAndDictionaryExpirationService(this IServiceCollection services)

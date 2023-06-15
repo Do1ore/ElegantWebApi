@@ -1,4 +1,5 @@
 ﻿using ElegantWebApi.Infrastructure.Contracts;
+using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 
 namespace ElegantWebApi.Infrastructure.Services
@@ -6,17 +7,21 @@ namespace ElegantWebApi.Infrastructure.Services
     public sealed class ExpirationDataService : IExprirationDataService
     {
         private ConcurrentDictionary<string, DateTime> _expirationTime;
-        public ExpirationDataService()
+        private readonly ILogger<IExprirationDataService> _logger;
+        public ExpirationDataService(ILogger<IExprirationDataService> logger)
         {
             _expirationTime = new ConcurrentDictionary<string, DateTime>();
+            _logger = logger;
         }
 
         public Task AddExpirationTimeAsync(string key, DateTime expirationTime)
         {
-            if (!_expirationTime.TryAdd(key, expirationTime))
+            if (_expirationTime.TryAdd(key, expirationTime))
             {
                 _expirationTime[key] = expirationTime;
             };
+            _logger.LogInformation($"Added expiration time for record with id: {key}. New expiration time: {expirationTime}");
+
             return Task.CompletedTask;
         }
 
@@ -43,6 +48,8 @@ namespace ElegantWebApi.Infrastructure.Services
         public Task UpdateExparationTimeAsync(string key, DateTime expirationTime)
         {
             _expirationTime.AddOrUpdate(key, expirationTime, (k, oldvalue) => expirationTime);
+            _logger.LogInformation($"Added expiration time for record with id: {key}. New expiration time: {expirationTime}");
+
             return Task.CompletedTask;
         }
     }
