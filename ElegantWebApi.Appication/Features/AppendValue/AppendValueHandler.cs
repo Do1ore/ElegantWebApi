@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElegantWebApi.Application.Features.UpdateDataList
 {
-    internal class UpdateDataListHandler
+    internal class AppendValueHandler
     {
     }
 }

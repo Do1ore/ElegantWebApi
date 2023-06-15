@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
+using ElegantWebApi.Infrastructure.Contracts;
 
 namespace ElegantWebApi.Infrastructure.Services
 {
@@ -35,7 +29,6 @@ namespace ElegantWebApi.Infrastructure.Services
             }
             else
             {
-
                 Create(key, new List<object>() { value });
             }
             return Task.CompletedTask;
@@ -43,10 +36,12 @@ namespace ElegantWebApi.Infrastructure.Services
 
         public Task<List<object>> Get(string key)
         {
+           
             if (_dictionary.TryGetValue(key, out List<object>? list))
             {
                 if (list.Count >= 0)
                 {
+                    
                     return Task.FromResult(list);
                 }
             }

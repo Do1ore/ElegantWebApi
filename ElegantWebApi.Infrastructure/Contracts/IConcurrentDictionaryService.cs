@@ -1,4 +1,4 @@
-﻿namespace ElegantWebApi.Infrastructure.Services
+﻿namespace ElegantWebApi.Infrastructure.Contracts
 {
     public interface IConcurrentDictionaryService
     {

@@ -1,5 +1,6 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
 using ElegantWebApi.Infrastructure;
+using ElegantWebApi.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@ namespace ElegantWebApi.Api.Extensions
 
         public static IServiceCollection SetupCustomHostedService(this IServiceCollection services)
         {
-            services.AddHostedService<IConcurrentDictionaryHostedService>();
+            services.AddHostedService<ConcurrentDictionaryHostedService>();
             return services;
         }
     }

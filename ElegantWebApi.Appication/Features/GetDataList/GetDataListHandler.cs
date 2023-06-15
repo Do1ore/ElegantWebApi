@@ -1,23 +1,30 @@
 ﻿using ElegantWebApi.Domain.Entities;
 using ElegantWebApi.Infrastructure;
+using ElegantWebApi.Infrastructure.Contracts;
 using MediatR;
+using System.Collections.Concurrent;
 
 namespace ElegantWebApi.Application.Features.GetDataList
 {
     public class GetDataListHandler : IRequestHandler<GetDataListCommand, DataListModel>
     {
-        private readonly IConcurrentDictionaryHostedService _dictionaryService;
-        public GetDataListHandler(IConcurrentDictionaryHostedService dictionaryService)
+        private readonly IConcurrentDictionaryService _dictionaryService;
+
+        public GetDataListHandler(IConcurrentDictionaryService dictionaryService)
         {
             _dictionaryService = dictionaryService;
         }
 
-        public Task<DataListModel> Handle(GetDataListCommand request, CancellationToken cancellationToken)
+        public async Task<DataListModel> Handle(GetDataListCommand request, CancellationToken cancellationToken)
         {
-            var result = _dictionaryService.Get(request.Id).GetAwaiter().GetResult();
-            return Task.FromResult(new DataListModel() { Id = Guid.NewGuid(), Values = result });
+            var valuesList = await _dictionaryService.Get(request.Id);
+            DataListModel model = new DataListModel()
+            {
+                Id = Guid.Parse(request.Id),
+                Values = valuesList
+            };
+            return model;
 
-            return Task.FromResult(new DataListModel());
         }
     }
 }

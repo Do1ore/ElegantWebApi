@@ -1,4 +1,5 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
+using ElegantWebApi.Application.Features.GetDataList;
 using ElegantWebApi.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,10 @@ namespace ElegantWebApi.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllValues()
+        public async Task<IActionResult> GetDataListFromIdAsync([AsParameters] string id)
         {
-            return Ok();
+            var result = await _mediator.Send(new GetDataListCommand(id));
+            return Ok(result);
         }
 
         [HttpPost]

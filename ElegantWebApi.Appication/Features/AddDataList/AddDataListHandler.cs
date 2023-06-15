@@ -1,6 +1,7 @@
 ﻿
 using ElegantWebApi.Domain.Entities;
 using ElegantWebApi.Infrastructure;
+using ElegantWebApi.Infrastructure.Contracts;
 using FluentValidation;
 using MediatR;
 
@@ -10,8 +11,8 @@ namespace ElegantWebApi.Application.Features.AddDataList
     {
 
         private readonly IValidator<AddDataListCommand> _validator;
-        private readonly IConcurrentDictionaryHostedService _dictionaryService;
-        public AddDataListHandler(IValidator<AddDataListCommand> validator, IConcurrentDictionaryHostedService dictionaryService)
+        private readonly IConcurrentDictionaryService _dictionaryService;
+        public AddDataListHandler(IValidator<AddDataListCommand> validator, IConcurrentDictionaryService dictionaryService)
         {
             _validator = validator;
             _dictionaryService = dictionaryService;
@@ -27,8 +28,7 @@ namespace ElegantWebApi.Application.Features.AddDataList
                 throw new ValidationException(validationResult.Errors);
             }
 
-
-            _ = _dictionaryService.Create(request.listModel!.Id.ToString(), request.listModel.Values!);
+            await _dictionaryService.Create(request.listModel!.Id.ToString(), request.listModel.Values!);
 
             return request.listModel!;
         }
