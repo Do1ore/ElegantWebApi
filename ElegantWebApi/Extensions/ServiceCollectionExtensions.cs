@@ -1,5 +1,6 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
 using ElegantWebApi.Infrastructure;
+using ElegantWebApi.Infrastructure.Contracts;
 using ElegantWebApi.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
@@ -20,6 +21,11 @@ namespace ElegantWebApi.Api.Extensions
         public static IServiceCollection SetupValidationForCommands(this IServiceCollection services)
         {
             services.AddTransient<IValidator<AddDataListCommand>, AddDataListCommandValidator>();
+            return services;
+        }
+        public static IServiceCollection SetupDictionaryService(this IServiceCollection services)
+        {
+            services.AddSingleton<IConcurrentDictionaryService, ConcurrentDictionaryService>();
             return services;
         }
 

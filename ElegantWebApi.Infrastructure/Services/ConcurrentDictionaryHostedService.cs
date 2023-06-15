@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ElegantWebApi.Infrastructure.Contracts;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
@@ -7,14 +8,17 @@ namespace ElegantWebApi.Infrastructure.Services
 {
     public class ConcurrentDictionaryHostedService : BackgroundService
     {
-        private ConcurrentDictionary<string, List<object>> _dictionary;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
-        public ConcurrentDictionaryHostedService(ILogger<ConcurrentDictionaryHostedService> logger, IConfiguration configuration)
+        private readonly int _checkIntervalInSeconds;
+        public ConcurrentDictionaryHostedService(
+            ILogger<ConcurrentDictionaryHostedService> logger,
+            IConfiguration configuration
+        )
         {
-            _dictionary = new ConcurrentDictionary<string, List<object>>();
             _logger = logger;
             _configuration = configuration;
+            _checkIntervalInSeconds = Convert.ToInt32(_configuration.GetSection("DefaultCheckIntervalTime")["DefaultCheckIntervalTimeInSeconds"]);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -23,8 +27,15 @@ namespace ElegantWebApi.Infrastructure.Services
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
-
-                    await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
+                    _logger.LogInformation("ConcurrentDictionaryHostedService started!");
+                    await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
+                    //foreach (var expriryData in _dictionaryService._expirationRecords)
+                    //{
+                    //    if (expriryData.Value <= DateTime.UtcNow)
+                    //    {
+                    //        await _dictionaryService.Delete(expriryData.Key);
+                    //    }
+                    //}
                 }
             }
             catch (TaskCanceledException)

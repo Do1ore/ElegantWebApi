@@ -1,8 +1,6 @@
 ﻿using ElegantWebApi.Domain.Entities;
-using ElegantWebApi.Infrastructure;
 using ElegantWebApi.Infrastructure.Contracts;
 using MediatR;
-using System.Collections.Concurrent;
 
 namespace ElegantWebApi.Application.Features.GetDataList
 {
