@@ -1,12 +1,10 @@
-﻿using ElegantWebApi.Infrastructure.Contracts;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Collections.Concurrent;
 
 namespace ElegantWebApi.Infrastructure.Services
 {
-    public class ConcurrentDictionaryHostedService : BackgroundService
+    public sealed class ConcurrentDictionaryHostedService : BackgroundService
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;

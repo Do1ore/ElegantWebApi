@@ -3,7 +3,7 @@ using ElegantWebApi.Infrastructure.Contracts;
 
 namespace ElegantWebApi.Infrastructure.Services
 {
-    public class ConcurrentDictionaryService : IConcurrentDictionaryService
+    public sealed class ConcurrentDictionaryService : IConcurrentDictionaryService
     {
         private ConcurrentDictionary<string, List<object>> _dictionary;
        
