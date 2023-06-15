@@ -13,7 +13,7 @@ builder.Services.AddMemoryCache();
 builder.Services.SetupMediatR();
 builder.Services.SetupValidationForCommands();
 builder.Services.SetupCustomHostedService();
-builder.Services.SetupDictionaryService();
+builder.Services.SetupDictionaryAndDictionaryExpirationService();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

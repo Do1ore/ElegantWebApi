@@ -20,6 +20,16 @@ namespace ElegantWebApi.Infrastructure.Services
             return Task.CompletedTask;
         }
 
+        public Task<List<KeyValuePair<string, DateTime>>> GetAllAsync()
+        {
+            if (_expirationTime.Count <= 0)
+            {
+                return Task.FromResult(new List<KeyValuePair<string, DateTime>>());
+            }
+
+            return Task.FromResult(_expirationTime.ToList());
+        }
+
         public Task<DateTime> GetExprirationTimeAsync(string key)
         {
             if (_expirationTime.TryGetValue(key, out DateTime expirationTime))

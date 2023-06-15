@@ -12,10 +12,12 @@ namespace ElegantWebApi.Application.Features.AddDataList
 
         private readonly IValidator<AddDataListCommand> _validator;
         private readonly IConcurrentDictionaryService _dictionaryService;
-        public AddDataListHandler(IValidator<AddDataListCommand> validator, IConcurrentDictionaryService dictionaryService)
+        private readonly IExprirationDataService _exprirationDataService;
+        public AddDataListHandler(IValidator<AddDataListCommand> validator, IConcurrentDictionaryService dictionaryService, IExprirationDataService exprirationDataService)
         {
             _validator = validator;
             _dictionaryService = dictionaryService;
+            _exprirationDataService = exprirationDataService;
         }
 
         public async Task<DataListModel> Handle(AddDataListCommand request, CancellationToken cancellationToken)

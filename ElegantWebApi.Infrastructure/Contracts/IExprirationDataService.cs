@@ -5,7 +5,6 @@
         Task AddExpirationTimeAsync(string key, DateTime expirationTime);
         Task<DateTime> GetExprirationTimeAsync(string key);
         Task UpdateExparationTimeAsync(string key, DateTime expirationTime);
-
-
+        public Task<List<KeyValuePair<string, DateTime>>> GetAllAsync();
     }
 }

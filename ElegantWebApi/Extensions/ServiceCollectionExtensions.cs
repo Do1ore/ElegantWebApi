@@ -23,9 +23,10 @@ namespace ElegantWebApi.Api.Extensions
             services.AddTransient<IValidator<AddDataListCommand>, AddDataListCommandValidator>();
             return services;
         }
-        public static IServiceCollection SetupDictionaryService(this IServiceCollection services)
+        public static IServiceCollection SetupDictionaryAndDictionaryExpirationService(this IServiceCollection services)
         {
             services.AddSingleton<IConcurrentDictionaryService, ConcurrentDictionaryService>();
+            services.AddSingleton<IExprirationDataService, ExpirationDataService>();
             return services;
         }
 

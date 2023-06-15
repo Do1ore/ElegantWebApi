@@ -10,31 +10,40 @@ namespace ElegantWebApi.Infrastructure.Services
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
         private readonly int _checkIntervalInSeconds;
+        private readonly IConcurrentDictionaryService _dictionaryService;
+        private readonly IExprirationDataService _exprirationDataService;
         public ConcurrentDictionaryHostedService(
             ILogger<ConcurrentDictionaryHostedService> logger,
-            IConfiguration configuration
-        )
+            IConfiguration configuration,
+            IExprirationDataService exprirationDataService,
+            IConcurrentDictionaryService dictionaryService)
         {
             _logger = logger;
             _configuration = configuration;
-            _checkIntervalInSeconds = Convert.ToInt32(_configuration.GetSection("DefaultCheckIntervalTime")["DefaultCheckIntervalTimeInSeconds"]);
+            _checkIntervalInSeconds = Convert.ToInt32(_configuration
+                .GetSection("DefaultCheckIntervalTime")["DefaultCheckIntervalTimeInSeconds"]);
+            _exprirationDataService = exprirationDataService;
+            _dictionaryService = dictionaryService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
             {
+                _logger.LogInformation("ConcurrentDictionaryHostedService started!");
+
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    _logger.LogInformation("ConcurrentDictionaryHostedService started!");
+                    foreach (var keyDateTiemePair in await _exprirationDataService.GetAllAsync())
+                    {
+                        if (keyDateTiemePair.Value <= DateTime.Now)
+                        {
+                            await _dictionaryService.Delete(keyDateTiemePair.Key);
+                            _logger.LogInformation($"Record with id: {keyDateTiemePair.Key} erased. Expired");
+                        }
+                    }
                     await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
-                    //foreach (var expriryData in _dictionaryService._expirationRecords)
-                    //{
-                    //    if (expriryData.Value <= DateTime.UtcNow)
-                    //    {
-                    //        await _dictionaryService.Delete(expriryData.Key);
-                    //    }
-                    //}
+
                 }
             }
             catch (TaskCanceledException)
