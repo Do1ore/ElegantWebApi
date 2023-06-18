@@ -1,5 +1,4 @@
-﻿
-using ElegantWebApi.Domain.Entities;
+﻿using ElegantWebApi.Domain.Entities;
 using MediatR;
 
 namespace ElegantWebApi.Application.Features.AddDataList
