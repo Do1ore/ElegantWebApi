@@ -2,9 +2,10 @@
 {
     public interface IExprirationDataService
     {
-        Task AddExpirationTimeAsync(string key, DateTime expirationTime);
-        Task<DateTime> GetExprirationTimeAsync(string key);
-        Task UpdateExparationTimeAsync(string key, DateTime expirationTime);
+        public Task AddExpirationTimeAsync(string key, DateTime expirationTime);
+        public Task<DateTime> GetExprirationTimeAsync(string key);
+        public Task UpdateExparationTimeAsync(string key, DateTime expirationTime);
         public Task<List<KeyValuePair<string, DateTime>>> GetAllAsync();
+        public Task RemoveAsync(string key);
     }
 }
