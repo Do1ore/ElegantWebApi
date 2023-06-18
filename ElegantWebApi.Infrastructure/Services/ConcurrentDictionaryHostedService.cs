@@ -44,8 +44,6 @@ namespace ElegantWebApi.Infrastructure.Services
                     {
                         if (keyDateTiemePair.Value <= DateTime.Now)
                         {
-
-                            //todo remove expired key value pairs
                             var result = await _dictionaryService.DeleteAsync(keyDateTiemePair.Key);
 
                             if (result != null)
