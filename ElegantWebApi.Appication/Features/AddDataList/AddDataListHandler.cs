@@ -13,15 +13,15 @@ namespace ElegantWebApi.Application.Features.AddDataList
 
         private readonly IValidator<AddDataListCommand> _validator;
         private readonly IConcurrentDictionaryService _dictionaryService;
-        private readonly IExprirationDataService _exprirationDataService;
+        private readonly IExpirationDataService _expirationService;
         public AddDataListHandler(
             IValidator<AddDataListCommand> validator,
             IConcurrentDictionaryService dictionaryService,
-            IExprirationDataService exprirationDataService)
+            IExpirationDataService expirationService)
         {
             _validator = validator;
             _dictionaryService = dictionaryService;
-            _exprirationDataService = exprirationDataService;
+            _expirationService = expirationService;
         }
 
         public async Task<DataListModel> Handle(AddDataListCommand request, CancellationToken cancellationToken)
@@ -31,7 +31,7 @@ namespace ElegantWebApi.Application.Features.AddDataList
             await _dictionaryService
                 .CreateAsync(request.ListModel!.Id.ToString(), request.ListModel.Values!);
 
-            await _exprirationDataService
+            await _expirationService
                 .AddExpirationTimeAsync(request.ListModel!.Id.ToString(), request.ListModel!.ExpirationTime);
 
 

@@ -30,8 +30,8 @@ namespace ElegantWebApi.Api.Extensions
         }
         public static IServiceCollection SetupDictionaryAndDictionaryExpirationService(this IServiceCollection services)
         {
-            services.AddSingleton<IConcurrentDictionaryService, ConcurrentDictionaryHostedService>();
-            services.AddSingleton<IExprirationDataService, ExpirationDataService>();
+            services.AddSingleton<IConcurrentDictionaryService, ConcurrentDictionaryService>();
+            services.AddSingleton<IExpirationDataService, ExpirationDataService>();
             return services;
         }
 
