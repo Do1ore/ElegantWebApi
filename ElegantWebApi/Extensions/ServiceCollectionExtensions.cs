@@ -6,6 +6,8 @@ using ElegantWebApi.Infrastructure.Contracts;
 using ElegantWebApi.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace ElegantWebApi.Api.Extensions
 {
@@ -36,6 +38,20 @@ namespace ElegantWebApi.Api.Extensions
         public static IServiceCollection SetupCustomHostedService(this IServiceCollection services)
         {
             services.AddHostedService<ConcurrentDictionaryHostedService>();
+            return services;
+        }
+
+        public static IServiceCollection ConfigureSwaggerDoc(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ValueListApi", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile );
+
+                c.IncludeXmlComments(xmlPath);
+            });
+         
             return services;
         }
     }

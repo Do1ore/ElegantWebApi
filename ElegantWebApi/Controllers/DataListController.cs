@@ -20,13 +20,22 @@ namespace ElegantWebApi.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Returns values from dictionary by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetDataListFromIdAsync([AsParameters] string id)
         {
             var result = await _mediator.Send(new GetDataListCommand(id));
             return Ok(result);
         }
-
+        /// <summary>
+        /// Creates a new dictionary with list of objects as values.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddKeyValuePair([FromBody] DataListModel value)
         {
@@ -34,14 +43,23 @@ namespace ElegantWebApi.Api.Controllers
             return Ok(result);
 
         }
-
-        [HttpPut]
+        /// <summary>
+        /// Add value to dictionary by id
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateKeyValuePair([FromBody] SingleDataModel value)
         {
             await _mediator.Send(new AppendValueCommand(value));
             return Ok(value);
         }
 
+        /// <summary> 
+        /// Remove a dictionary by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteKeyValuePairAsync([AsParameters] string id)
         {

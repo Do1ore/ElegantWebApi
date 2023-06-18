@@ -3,13 +3,7 @@ using MediatR;
 
 namespace ElegantWebApi.Application.Features.GetDataList
 {
-    public class GetDataListCommand : IRequest<DataListModel>
+    public record struct GetDataListCommand(string Id) : IRequest<List<object>>
     {
-        public string Id { get; }
-
-        public GetDataListCommand(string id)
-        {
-            Id = id;
-        }
     }
 }

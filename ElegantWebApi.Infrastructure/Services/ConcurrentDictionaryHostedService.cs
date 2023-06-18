@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ElegantWebApi.Infrastructure.Services
 {
@@ -36,10 +35,17 @@ namespace ElegantWebApi.Infrastructure.Services
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    foreach (var keyDateTiemePair in await _exprirationDataService.GetAllAsync())
+                    var expirationInfo = await _exprirationDataService.GetAllAsync();
+                    if(expirationInfo.Count <= 0)
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
+                    }
+                    foreach (var keyDateTiemePair in expirationInfo)
                     {
                         if (keyDateTiemePair.Value <= DateTime.Now)
                         {
+
+                            //todo remove expired key value pairs
                             var result = await _dictionaryService.DeleteAsync(keyDateTiemePair.Key);
                             if (result != null)
                             {
@@ -52,17 +58,13 @@ namespace ElegantWebApi.Infrastructure.Services
 
                             }
                         }
-                        _expiredCounter = 0;
 
                     }
-                    _logger.LogInformation($"{DateTime.Now.ToShortTimeString()}: Expired: {_expiredCounter}");
-                    List<string> info = new();
-                    foreach (var item in await _exprirationDataService.GetAllAsync())
-                    {
-                        info.Add(item.Key + ": " + item.Value);
-                    }
-                    _logger.LogInformation($"Expiration info: \n{string.Join(", ", info)}");
+                    await LogInfoAboutExpiration(stoppingToken);
                     await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
+                    _expiredCounter = 0;
+
+
                 }
             }
             catch (TaskCanceledException)
@@ -86,5 +88,15 @@ namespace ElegantWebApi.Infrastructure.Services
             }
         }
 
+        private async Task LogInfoAboutExpiration(CancellationToken stoppingToken)
+        {
+            _logger.LogInformation($"{DateTime.Now.ToShortTimeString()}: Expired: {_expiredCounter}");
+            List<string> info = new();
+            foreach (var item in await _exprirationDataService.GetAllAsync())
+            {
+                info.Add($"{item.Key} Expires: {item.Value}");
+            }
+            _logger.LogInformation($"Expiration info: \n{string.Join(", ", info)}");
+        }
     }
 }

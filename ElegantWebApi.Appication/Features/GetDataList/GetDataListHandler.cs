@@ -4,7 +4,7 @@ using MediatR;
 
 namespace ElegantWebApi.Application.Features.GetDataList
 {
-    public class GetDataListHandler : IRequestHandler<GetDataListCommand, DataListModel>
+    public class GetDataListHandler : IRequestHandler<GetDataListCommand, List<object>>
     {
         private readonly IConcurrentDictionaryService _dictionaryService;
 
@@ -13,15 +13,10 @@ namespace ElegantWebApi.Application.Features.GetDataList
             _dictionaryService = dictionaryService;
         }
 
-        public async Task<DataListModel> Handle(GetDataListCommand request, CancellationToken cancellationToken)
+        public async Task<List<object>> Handle(GetDataListCommand request, CancellationToken cancellationToken)
         {
             var valuesList = await _dictionaryService.GetAsync(request.Id);
-            DataListModel model = new DataListModel()
-            {
-                Id = Guid.Parse(request.Id),
-                Values = valuesList
-            };
-            return model;
+            return valuesList;
 
         }
     }

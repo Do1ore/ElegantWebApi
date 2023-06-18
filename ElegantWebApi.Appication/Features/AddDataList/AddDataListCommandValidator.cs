@@ -9,7 +9,6 @@ namespace ElegantWebApi.Application.Features.AddDataList
         private readonly IConfiguration _configuration;
         public AddDataListCommandValidator(IConfiguration configuration)
         {
-            RuleFor(x => x.ListModel).NotNull().NotEmpty();
             _configuration = configuration;
         }
 
@@ -19,17 +18,24 @@ namespace ElegantWebApi.Application.Features.AddDataList
             if (context.InstanceToValidate.ListModel != null)
             {
                 var myDateTime = context.InstanceToValidate.ListModel.ExpirationTime;
+                var maxExirationTime = Convert.ToInt32(_configuration.GetSection("DefaultExpirationTime")["MaxEpirationTimeInMinutes"]);
+                var defaultExpirationTime = Convert.ToInt32(_configuration.GetSection("DefaultExpirationTime")["DefaultExpirationTimeInMinutes"]);
 
-                if (myDateTime == default | myDateTime < DateTime.Now)
+                if (myDateTime == default | myDateTime < DateTime.Now | GetMinutesDifference(myDateTime) > maxExirationTime)
                 {
-                    var defaultDateTime = _configuration.GetSection("DefaultExpirationTime")["DefaultExpirationTimeInMinutes"];
-
-                    context.InstanceToValidate.ListModel.ExpirationTime = DateTime.Now.AddMinutes(int.Parse(defaultDateTime!));
+                    context.InstanceToValidate.ListModel.ExpirationTime = DateTime.Now.AddMinutes(defaultExpirationTime);
                 }
 
             }
 
             return base.ValidateAsync(context, cancellation);
+        }
+
+        public int GetMinutesDifference(DateTime givenDateTime)
+        {
+            DateTime now = DateTime.Now;
+            TimeSpan difference = now - givenDateTime;
+            return (int)difference.TotalMinutes;
         }
     }
 }
