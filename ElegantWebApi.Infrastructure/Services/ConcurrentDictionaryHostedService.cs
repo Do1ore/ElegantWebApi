@@ -11,19 +11,19 @@ namespace ElegantWebApi.Infrastructure.Services
         private readonly ILogger _logger;
         private readonly int _checkIntervalInSeconds;
         private readonly IConcurrentDictionaryService _dictionaryService;
-        private readonly IExprirationDataService _exprirationDataService;
+        private readonly IExpirationDataService _expirationDataService;
         private int _expiredCounter = 0;
         public ConcurrentDictionaryHostedService(
             ILogger<ConcurrentDictionaryHostedService> logger,
             IConfiguration configuration,
-            IExprirationDataService exprirationDataService,
+            IExpirationDataService expirationDataService,
             IConcurrentDictionaryService dictionaryService)
         {
             _logger = logger;
             _configuration = configuration;
             _checkIntervalInSeconds = Convert.ToInt32(_configuration
                 .GetSection("DefaultCheckIntervalTime")["DefaultCheckIntervalTimeInSeconds"]);
-            _exprirationDataService = exprirationDataService;
+            _expirationDataService = expirationDataService;
             _dictionaryService = dictionaryService;
         }
 
@@ -35,8 +35,8 @@ namespace ElegantWebApi.Infrastructure.Services
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    var expirationInfo = await _exprirationDataService.GetAllAsync();
-                    if (expirationInfo.Count <= 0)
+                    var expirationInfo = await _expirationDataService.GetAllAsync();
+                    if(expirationInfo.Count <= 0)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
                     }
@@ -45,16 +45,15 @@ namespace ElegantWebApi.Infrastructure.Services
                         if (keyDateTiemePair.Value <= DateTime.Now)
                         {
                             var result = await _dictionaryService.DeleteAsync(keyDateTiemePair.Key);
-
                             if (result != null)
                             {
-                                await _exprirationDataService.RemoveAsync(keyDateTiemePair.Key);
                                 _expiredCounter++;
                                 _logger.LogInformation($"Record with id: {keyDateTiemePair.Key} erased. Expired");
                             }
                             else
                             {
                                 _logger.LogError($"Error while deleting: {keyDateTiemePair.Key}");
+
                             }
                         }
 
@@ -91,7 +90,7 @@ namespace ElegantWebApi.Infrastructure.Services
         {
             _logger.LogInformation($"{DateTime.Now.ToShortTimeString()}: Expired: {_expiredCounter}");
             List<string> info = new();
-            foreach (var item in await _exprirationDataService.GetAllAsync())
+            foreach (var item in await _expirationDataService.GetAllAsync())
             {
                 info.Add($"{item.Key} Expires: {item.Value}");
             }
