@@ -36,7 +36,7 @@ namespace ElegantWebApi.Infrastructure.Services
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     var expirationInfo = await _exprirationDataService.GetAllAsync();
-                    if(expirationInfo.Count <= 0)
+                    if (expirationInfo.Count <= 0)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
                     }
@@ -47,15 +47,16 @@ namespace ElegantWebApi.Infrastructure.Services
 
                             //todo remove expired key value pairs
                             var result = await _dictionaryService.DeleteAsync(keyDateTiemePair.Key);
+
                             if (result != null)
                             {
+                                await _exprirationDataService.RemoveAsync(keyDateTiemePair.Key);
                                 _expiredCounter++;
                                 _logger.LogInformation($"Record with id: {keyDateTiemePair.Key} erased. Expired");
                             }
                             else
                             {
                                 _logger.LogError($"Error while deleting: {keyDateTiemePair.Key}");
-
                             }
                         }
 
