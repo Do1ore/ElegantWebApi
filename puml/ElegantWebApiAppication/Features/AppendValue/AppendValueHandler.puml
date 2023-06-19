@@ -1,0 +1,9 @@
+@startuml
+class AppendValueHandler {
+    + AppendValueHandler(expirationDataService:IExpirationDataService, dictionaryService:IConcurrentDictionaryService, validator:IValidator<AppendValueCommand>)
+    + <<async>> Handle(request:AppendValueCommand, cancellationToken:CancellationToken) : Task<SingleDataModel>
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<AppendValueCommand,SingleDataModel>" <|-- AppendValueHandler
+@enduml

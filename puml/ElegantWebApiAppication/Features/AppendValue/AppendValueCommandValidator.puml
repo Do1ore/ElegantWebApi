@@ -1,0 +1,9 @@
+@startuml
+class AppendValueCommandValidator {
+    + AppendValueCommandValidator(configuration:IConfiguration)
+    + <<override>> ValidateAsync(context:ValidationContext<AppendValueCommand>, cancellation:CancellationToken) : Task<ValidationResult>
+}
+class "AbstractValidator`1"<T> {
+}
+"AbstractValidator`1" "<AppendValueCommand>" <|-- AppendValueCommandValidator
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class ValidErrorCode <<sealed>> {
+    + {static} GetErrorCode(exception:Exception) : HttpStatusCode
+}
+@enduml

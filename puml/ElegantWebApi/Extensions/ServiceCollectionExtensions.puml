@@ -1,0 +1,9 @@
+@startuml
+class ServiceCollectionExtensions <<static>> {
+    + {static} SetupMediatR(services:IServiceCollection) : IServiceCollection
+    + {static} SetupValidationForCommands(services:IServiceCollection) : IServiceCollection
+    + {static} SetupDictionaryAndDictionaryExpirationService(services:IServiceCollection) : IServiceCollection
+    + {static} SetupCustomHostedService(services:IServiceCollection) : IServiceCollection
+    + {static} ConfigureSwaggerDoc(services:IServiceCollection) : IServiceCollection
+}
+@enduml

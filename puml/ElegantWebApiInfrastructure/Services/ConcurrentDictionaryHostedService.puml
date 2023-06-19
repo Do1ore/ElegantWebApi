@@ -1,0 +1,6 @@
+@startuml
+class ConcurrentDictionaryHostedService <<sealed>> {
+    + ConcurrentDictionaryHostedService(logger:ILogger<ConcurrentDictionaryHostedService>, configuration:IConfiguration, expirationDataService:IExpirationDataService, dictionaryService:IConcurrentDictionaryService)
+}
+BackgroundService <|-- ConcurrentDictionaryHostedService
+@enduml

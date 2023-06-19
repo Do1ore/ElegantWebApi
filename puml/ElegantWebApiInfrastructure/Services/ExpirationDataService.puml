@@ -1,0 +1,10 @@
+@startuml
+class ExpirationDataService <<sealed>> {
+    + ExpirationDataService(logger:ILogger<IExpirationDataService>)
+    + AddExpirationTimeAsync(key:string, expirationTime:DateTime) : Task
+    + GetAllAsync() : Task<List<KeyValuePair<string, DateTime>>>
+    + GetExpirationTimeAsync(key:string) : Task<DateTime>
+    + UpdateExpirationTimeAsync(key:string, expirationTime:DateTime) : Task
+}
+IExpirationDataService <|-- ExpirationDataService
+@enduml

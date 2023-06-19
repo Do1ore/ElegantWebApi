@@ -1,0 +1,8 @@
+@startuml
+interface IConcurrentDictionaryService {
+    AppendAsync(key:string, value:object) : Task
+    CreateAsync(key:string, list:List<object>) : Task
+    DeleteAsync(id:string) : Task<List<object>>
+    GetAsync(key:string) : Task<List<object>>
+}
+@enduml

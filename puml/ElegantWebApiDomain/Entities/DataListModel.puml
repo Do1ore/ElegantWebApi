@@ -1,0 +1,7 @@
+@startuml
+class DataListModel <<sealed>> {
+    + Values : List<object>? <<get>> <<set>>
+}
+DataListModel --> "Id" Guid
+DataListModel --> "ExpirationTime" DateTime
+@enduml

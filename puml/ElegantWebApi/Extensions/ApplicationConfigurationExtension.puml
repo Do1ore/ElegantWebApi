@@ -1,0 +1,6 @@
+@startuml
+class ApplicationConfigurationExtension <<static>> {
+    + {static} SetUpApiDocumentation(services:IServiceCollection) : IServiceCollection
+    + {static} SetUpExcepions(app:IApplicationBuilder) : IApplicationBuilder
+}
+@enduml

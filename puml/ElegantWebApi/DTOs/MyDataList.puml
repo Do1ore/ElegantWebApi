@@ -1,0 +1,6 @@
+@startuml
+class MyDataList {
+    + Data : List<object>? <<get>> <<set>>
+    + ExpirationTime : DateTime? <<get>> <<set>>
+}
+@enduml
