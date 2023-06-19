@@ -3,7 +3,7 @@ using MediatR;
 
 namespace ElegantWebApi.Application.Features.AddDataList
 {
-    public record struct AddDataListCommand(DataListModel ListModel) : IRequest<DataListModel>
+    public record AddDataListCommand(DataListModel ListModel) : IRequest<DataListModel>
     {
 
     }

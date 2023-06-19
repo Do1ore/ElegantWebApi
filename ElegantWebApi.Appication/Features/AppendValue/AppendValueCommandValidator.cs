@@ -1,5 +1,4 @@
-﻿using ElegantWebApi.Application.Features.UpdateDataList;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.Extensions.Configuration;
 
@@ -9,19 +8,20 @@ namespace ElegantWebApi.Application.Features.AppendValue
     {
         public AppendValueCommandValidator(IConfiguration configuration)
         {
-            RuleFor(x => x.DataModel).NotNull().NotEmpty();
+            RuleFor(x => x.DataModel.Id).NotNull().NotEmpty()
+                .WithMessage("Value must be not null or empty");
+            RuleFor(expression: x => x.DataModel.Value).NotEmpty().NotNull()
+                .WithMessage("Value must be not null or empty");
         }
 
-        public override Task<ValidationResult> ValidateAsync(ValidationContext<AppendValueCommand> context, CancellationToken cancellation = default)
+        public override Task<ValidationResult> ValidateAsync(ValidationContext<AppendValueCommand> context,
+            CancellationToken cancellation = default)
         {
-            if (context.InstanceToValidate.DataModel == null)
-            {
-                context.AddFailure("ListModel", "Null reference.");
-            }
-            else if (context.InstanceToValidate.DataModel?.Id == null)
+            if (context.InstanceToValidate.DataModel?.Id == null)
             {
                 context.AddFailure("Id", "Null reference.");
             }
+
             return base.ValidateAsync(context, cancellation);
         }
     }

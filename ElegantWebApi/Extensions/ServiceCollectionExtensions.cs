@@ -1,7 +1,6 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
 using ElegantWebApi.Application.Features.AppendValue;
 using ElegantWebApi.Application.Features.DeleteDataList;
-using ElegantWebApi.Application.Features.UpdateDataList;
 using ElegantWebApi.Infrastructure.Contracts;
 using ElegantWebApi.Infrastructure.Services;
 using FluentValidation;
@@ -37,7 +36,7 @@ namespace ElegantWebApi.Api.Extensions
 
         public static IServiceCollection SetupCustomHostedService(this IServiceCollection services)
         {
-            services.AddHostedService<ConcurrentDictionaryHostedService>();
+            services.AddHostedService<DictionaryHostedMasterService>();
             return services;
         }
 

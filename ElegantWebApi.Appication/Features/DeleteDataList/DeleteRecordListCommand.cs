@@ -3,7 +3,7 @@ using MediatR;
 
 namespace ElegantWebApi.Application.Features.DeleteDataList
 {
-    public record struct DeleteRecordListCommand(string Id) : IRequest<DataListModel>
+    public record DeleteRecordListCommand(string Id) : IRequest<DataListModel>
     {
     }
 }

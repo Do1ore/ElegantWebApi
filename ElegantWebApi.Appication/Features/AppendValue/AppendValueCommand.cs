@@ -1,7 +1,7 @@
 ﻿using ElegantWebApi.Domain.Entities;
 using MediatR;
 
-namespace ElegantWebApi.Application.Features.UpdateDataList
+namespace ElegantWebApi.Application.Features.AppendValue
 {
-    public record struct AppendValueCommand(SingleDataModel DataModel) : IRequest<SingleDataModel> { }
+    public record AppendValueCommand(SingleDataModel DataModel) : IRequest<SingleDataModel> { }
 }

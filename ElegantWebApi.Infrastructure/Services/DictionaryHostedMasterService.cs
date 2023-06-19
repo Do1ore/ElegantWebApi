@@ -5,28 +5,37 @@ using Microsoft.Extensions.Logging;
 
 namespace ElegantWebApi.Infrastructure.Services
 {
-    public sealed class ConcurrentDictionaryHostedService : BackgroundService
+    /// <summary>
+    /// Background service to work with <see cref="IExpirationDataService"/> and  <see cref="IConcurrentDictionaryService"/>;
+    /// </summary>
+    public sealed class DictionaryHostedMasterService : BackgroundService
     {
-        private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
-        private readonly int _checkIntervalInSeconds;
         private readonly IConcurrentDictionaryService _dictionaryService;
         private readonly IExpirationDataService _expirationDataService;
         private int _expiredCounter = 0;
-        public ConcurrentDictionaryHostedService(
-            ILogger<ConcurrentDictionaryHostedService> logger,
+        private readonly int _checkIntervalInSeconds;
+
+        public DictionaryHostedMasterService(
+            ILogger<DictionaryHostedMasterService> logger,
             IConfiguration configuration,
             IExpirationDataService expirationDataService,
             IConcurrentDictionaryService dictionaryService)
         {
             _logger = logger;
-            _configuration = configuration;
-            _checkIntervalInSeconds = Convert.ToInt32(_configuration
+            _checkIntervalInSeconds = Convert.ToInt32(configuration
                 .GetSection("DefaultCheckIntervalTime")["DefaultCheckIntervalTimeInSeconds"]);
             _expirationDataService = expirationDataService;
             _dictionaryService = dictionaryService;
         }
 
+        /// <summary>
+        /// Checks if the data has expired, if it has expired then deletes
+        /// </summary>
+        /// <remarks>
+        /// When the stopping token is canceled, for example, a call made from services.msc,
+        /// we shouldn't exit with a non-zero exit code. In other words, this is expected...</remarks>
+        /// <param name="stoppingToken"></param>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
@@ -36,39 +45,27 @@ namespace ElegantWebApi.Infrastructure.Services
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     var expirationInfo = await _expirationDataService.GetAllAsync();
-                    if(expirationInfo.Count <= 0)
+                    if (expirationInfo.Count <= 0)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
                     }
-                    foreach (var keyDateTiemePair in expirationInfo)
+
+                    foreach (var dateTimePair in expirationInfo)
                     {
-                        if (keyDateTiemePair.Value <= DateTime.Now)
+                        if (dateTimePair.Value <= DateTime.Now)
                         {
-                            var result = await _dictionaryService.DeleteAsync(keyDateTiemePair.Key);
-                            if (result != null)
-                            {
-                                _expiredCounter++;
-                                _logger.LogInformation($"Record with id: {keyDateTiemePair.Key} erased. Expired");
-                            }
-                            else
-                            {
-                                _logger.LogError($"Error while deleting: {keyDateTiemePair.Key}");
-
-                            }
+                            await DoWorkToEraseAsync(dateTimePair);
                         }
-
                     }
+
                     await LogInfoAboutExpiration(stoppingToken);
                     await Task.Delay(TimeSpan.FromSeconds(_checkIntervalInSeconds), stoppingToken);
                     _expiredCounter = 0;
-
-
                 }
             }
             catch (TaskCanceledException)
             {
-                // When the stopping token is canceled, for example, a call made from services.msc,
-                // we shouldn't exit with a non-zero exit code. In other words, this is expected...
+                
             }
             catch (Exception ex)
             {
@@ -86,15 +83,41 @@ namespace ElegantWebApi.Infrastructure.Services
             }
         }
 
+        /// <summary>
+        /// Erases data from dictionary
+        /// </summary>
+        /// <param name="DateTimePair"></param>
+        private async Task DoWorkToEraseAsync(KeyValuePair<string, DateTime> DateTimePair)
+        {
+            var result = await _dictionaryService.DeleteAsync(DateTimePair.Key);
+            if (result.Count > 0)
+            {
+                _expiredCounter++;
+                await _expirationDataService.RemoveAsync(DateTimePair.Key);
+                _logger.LogInformation("Record with id: {Key} erased. ",
+                    DateTimePair.Key.ToString());
+            }
+            else
+            {
+                _logger.LogError("Error while deleting: {Key}", DateTimePair.Key.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Logs information about expiration 
+        /// </summary>
+        /// <param name="stoppingToken"></param>
         private async Task LogInfoAboutExpiration(CancellationToken stoppingToken)
         {
-            _logger.LogInformation($"{DateTime.Now.ToShortTimeString()}: Expired: {_expiredCounter}");
+            _logger.LogInformation("{ShortTimeString}: Expired: {ExpiredCounter}", DateTime.Now.ToShortTimeString(),
+                Convert.ToString(_expiredCounter));
             List<string> info = new();
             foreach (var item in await _expirationDataService.GetAllAsync())
             {
-                info.Add($"{item.Key} Expires: {item.Value}");
+                info.Add($"{item.Key} \nExpires: {item.Value}");
             }
-            _logger.LogInformation($"Expiration info: \n{string.Join(", ", info)}");
+
+            _logger.LogInformation("Expiration info: \n{Join}", string.Join(", \n", info));
         }
     }
 }

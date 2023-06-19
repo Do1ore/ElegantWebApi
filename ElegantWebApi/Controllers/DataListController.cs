@@ -1,7 +1,7 @@
 ﻿using ElegantWebApi.Application.Features.AddDataList;
+using ElegantWebApi.Application.Features.AppendValue;
 using ElegantWebApi.Application.Features.DeleteDataList;
 using ElegantWebApi.Application.Features.GetDataList;
-using ElegantWebApi.Application.Features.UpdateDataList;
 using ElegantWebApi.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,6 @@ namespace ElegantWebApi.Api.Controllers
     [ApiController]
     public class DataListController : ControllerBase
     {
-
         private readonly IMediator _mediator;
 
         public DataListController(IMediator mediator)
@@ -21,7 +20,7 @@ namespace ElegantWebApi.Api.Controllers
         }
 
         /// <summary>
-        /// Returns values from dictionary by id
+        /// Returns values from dictionary by id. Updates expiration time
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -31,6 +30,7 @@ namespace ElegantWebApi.Api.Controllers
             var result = await _mediator.Send(new GetDataListCommand(id));
             return Ok(result);
         }
+
         /// <summary>
         /// Creates a new dictionary with list of objects as values.
         /// </summary>
@@ -41,20 +41,20 @@ namespace ElegantWebApi.Api.Controllers
         {
             var result = await _mediator.Send(new AddDataListCommand(value));
             return Ok(result);
-
         }
+
         /// <summary>
-        /// Add value to dictionary by id
+        /// Add values to dictionary by id. If dictionary not exists, it will created
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateKeyValuePair([FromBody] SingleDataModel value)
+        [HttpPut]
+        public async Task<IActionResult> AppendValues([FromBody] SingleDataModel value)
         {
             await _mediator.Send(new AppendValueCommand(value));
             return Ok(value);
         }
-
+        
         /// <summary> 
         /// Remove a dictionary by id
         /// </summary>
