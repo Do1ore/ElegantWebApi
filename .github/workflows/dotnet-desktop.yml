@@ -102,6 +102,7 @@ jobs:
         Appx_Bundle_Platforms: x86|x64
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}
+        GIHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     # Remove the pfx
     - name: Remove the pfx
