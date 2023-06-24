@@ -1,9 +1,0 @@
-@startuml
-class DeleteRecordListHandler <<sealed>> {
-    + DeleteRecordListHandler(dictionaryService:IConcurrentDictionaryService, validator:IValidator<DeleteRecordListCommand>)
-    + <<async>> Handle(request:DeleteRecordListCommand, cancellationToken:CancellationToken) : Task<DataListModel>
-}
-class "IRequestHandler`2"<T1,T2> {
-}
-"IRequestHandler`2" "<DeleteRecordListCommand,DataListModel>" <|-- DeleteRecordListHandler
-@enduml

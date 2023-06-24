@@ -1,7 +1,0 @@
-@startuml
-class SingleDataModel {
-    + Value : object <<get>> <<set>>
-}
-SingleDataModel --> "Id" Guid
-SingleDataModel --> "ExpirationTime" DateTime
-@enduml

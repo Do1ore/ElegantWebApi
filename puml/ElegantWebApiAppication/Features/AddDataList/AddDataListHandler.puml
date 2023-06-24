@@ -1,9 +1,0 @@
-@startuml
-class AddDataListHandler {
-    + AddDataListHandler(validator:IValidator<AddDataListCommand>, dictionaryService:IConcurrentDictionaryService, expirationService:IExpirationDataService)
-    + <<async>> Handle(request:AddDataListCommand, cancellationToken:CancellationToken) : Task<DataListModel>
-}
-class "IRequestHandler`2"<T1,T2> {
-}
-"IRequestHandler`2" "<AddDataListCommand,DataListModel>" <|-- AddDataListHandler
-@enduml

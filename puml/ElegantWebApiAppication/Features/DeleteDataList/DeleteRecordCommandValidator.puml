@@ -1,8 +1,0 @@
-@startuml
-class DeleteRecordCommandValidator {
-    + DeleteRecordCommandValidator()
-}
-class "AbstractValidator`1"<T> {
-}
-"AbstractValidator`1" "<DeleteRecordListCommand>" <|-- DeleteRecordCommandValidator
-@enduml

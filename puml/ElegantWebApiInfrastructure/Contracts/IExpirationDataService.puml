@@ -1,8 +1,0 @@
-@startuml
-interface IExpirationDataService {
-    AddExpirationTimeAsync(key:string, expirationTime:DateTime) : Task
-    GetExpirationTimeAsync(key:string) : Task<DateTime>
-    UpdateExpirationTimeAsync(key:string, expirationTime:DateTime) : Task
-    + GetAllAsync() : Task<List<KeyValuePair<string, DateTime>>>
-}
-@enduml
