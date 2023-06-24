@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="995d2cdb-02c9-4615-969c-48cf1e1d804f" name="Changes" comment="Remove diagram">
+    <list default="true" id="995d2cdb-02c9-4615-969c-48cf1e1d804f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ElegantWebApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ElegantWebApi/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,9 +19,10 @@
   </component>
   <component name="Git.Settings">
     <branch-grouping />
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="features" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -197,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687641054987</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Example commit">
+      <created>1687643016275</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687643016275</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,6 +245,7 @@
     <MESSAGE value="+Unit tests" />
     <MESSAGE value="Diagrams" />
     <MESSAGE value="Remove diagram" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove diagram" />
+    <MESSAGE value="Example commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Example commit" />
   </component>
 </project>
