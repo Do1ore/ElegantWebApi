@@ -1,0 +1,9 @@
+@startuml
+class GetDataListHandler {
+    + GetDataListHandler(dictionaryService:IConcurrentDictionaryService)
+    + <<async>> Handle(request:GetDataListCommand, cancellationToken:CancellationToken) : Task<List<object>>
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<GetDataListCommand,List<object>>" <|-- GetDataListHandler
+@enduml

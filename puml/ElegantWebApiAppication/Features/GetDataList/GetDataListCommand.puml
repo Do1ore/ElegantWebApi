@@ -1,0 +1,6 @@
+@startuml
+class GetDataListCommand <<struct>> {
+}
+class "IRequest`1"<T> {
+}
+@enduml

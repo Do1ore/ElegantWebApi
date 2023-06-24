@@ -1,0 +1,9 @@
+@startuml
+class AddDataListCommandValidator {
+    + AddDataListCommandValidator(configuration:IConfiguration)
+    + <<override>> ValidateAsync(context:ValidationContext<AddDataListCommand>, cancellation:CancellationToken) : Task<ValidationResult>
+}
+class "AbstractValidator`1"<T> {
+}
+"AbstractValidator`1" "<AddDataListCommand>" <|-- AddDataListCommandValidator
+@enduml

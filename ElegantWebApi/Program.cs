@@ -1,6 +1,4 @@
 using ElegantWebApi.Api.Extensions;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +31,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-
-
 app.Run();
-
+public partial class Program { }

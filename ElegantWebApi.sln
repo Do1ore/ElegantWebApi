@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantWebApi.Application",
 		{8538F6CE-1874-473A-A090-DD4B4A67329E} = {8538F6CE-1874-473A-A090-DD4B4A67329E}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantWebApi.Tests", "ElegantWebApi.Tests\ElegantWebApi.Tests.csproj", "{9F7BD1E4-28BF-46C9-9415-C6263F39A44A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF37C92A-B8E9-4C66-9F3B-5D919D6E10B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F7BD1E4-28BF-46C9-9415-C6263F39A44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F7BD1E4-28BF-46C9-9415-C6263F39A44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F7BD1E4-28BF-46C9-9415-C6263F39A44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F7BD1E4-28BF-46C9-9415-C6263F39A44A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
