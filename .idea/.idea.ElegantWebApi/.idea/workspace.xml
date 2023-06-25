@@ -11,6 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="995d2cdb-02c9-4615-969c-48cf1e1d804f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ElegantWebApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ElegantWebApi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ElegantWebApi.Appication/Features/AppendValue/AppendValueHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElegantWebApi.Appication/Features/AppendValue/AppendValueHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ElegantWebApi/Controllers/DataListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElegantWebApi/Controllers/DataListController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +32,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c5980a202aaa4ef9b83d9606243f87709598/67/0006fed0/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/0b0337e1aff54aa994e48ae878d6613ab3c880/_3e513/ISerializable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b92f859131bde25d0f7a63de08963e995d1e1426e584dfd4b8e833d2d3dba/ExecutionTimer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/408228ec954dea822c451935f3e231f2e34777a6d7930e3a5015c84cb848d/JsonSerializer.Helpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c439425da351c75ac7d966a1cc8324b51a9c471865af79d2f2f3fcb65e392/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cdfaddec65dc50cf3bb9618bceaafd1aa1867fc79b14d5b1a1e9c1d3d2ba25d/IHostBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ElegantWebApi.Tests/DataListControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ElegantWebApi.Tests/Usings.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -51,7 +57,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "features",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -141,6 +147,7 @@
       <workItem from="1687632699899" duration="3679000" />
       <workItem from="1687636537384" duration="2785000" />
       <workItem from="1687640106891" duration="623000" />
+      <workItem from="1687706007166" duration="8964000" />
     </task>
     <task id="LOCAL-00001" summary="refactor">
       <created>1687098638141</created>
