@@ -53,7 +53,7 @@ namespace ElegantWebApi.Api.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SingleDataModel))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AppendValues([FromBody] SingleDataModel value)
         {

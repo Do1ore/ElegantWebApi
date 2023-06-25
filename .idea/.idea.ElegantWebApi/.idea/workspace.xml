@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="995d2cdb-02c9-4615-969c-48cf1e1d804f" name="Changes" comment="">
+    <list default="true" id="995d2cdb-02c9-4615-969c-48cf1e1d804f" name="Changes" comment="minor api controller return type update">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ElegantWebApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ElegantWebApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ElegantWebApi.Appication/Features/AppendValue/AppendValueHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElegantWebApi.Appication/Features/AppendValue/AppendValueHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ElegantWebApi/Controllers/DataListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElegantWebApi/Controllers/DataListController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +34,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/408228ec954dea822c451935f3e231f2e34777a6d7930e3a5015c84cb848d/JsonSerializer.Helpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c439425da351c75ac7d966a1cc8324b51a9c471865af79d2f2f3fcb65e392/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cdfaddec65dc50cf3bb9618bceaafd1aa1867fc79b14d5b1a1e9c1d3d2ba25d/IHostBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/vladx/source/repos/ElegantWebApi/ElegantWebApi.Appication/Features/AppendValue/AppendValueHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ElegantWebApi.Tests/DataListControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ElegantWebApi.Tests/Usings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/vladx/source/repos/ElegantWebApi/ElegantWebApi/Controllers/DataListController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -147,7 +147,7 @@
       <workItem from="1687632699899" duration="3679000" />
       <workItem from="1687636537384" duration="2785000" />
       <workItem from="1687640106891" duration="623000" />
-      <workItem from="1687706007166" duration="8964000" />
+      <workItem from="1687706007166" duration="9940000" />
     </task>
     <task id="LOCAL-00001" summary="refactor">
       <created>1687098638141</created>
@@ -212,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687643016275</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="minor api controller return type update">
+      <created>1687725087874</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687725087874</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +260,39 @@
     <MESSAGE value="Diagrams" />
     <MESSAGE value="Remove diagram" />
     <MESSAGE value="Example commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Example commit" />
+    <MESSAGE value="minor api controller return type update" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor api controller return type update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ElegantWebApi.Tests/DataListControllerTests.cs</url>
+          <line>84</line>
+          <properties documentPath="C:\Users\vladx\source\repos\ElegantWebApi\ElegantWebApi.Tests\DataListControllerTests.cs" initialLine="84" containingFunctionPresentation="Method 'AppendValues_ReturnsOkResult'">
+            <startOffsets>
+              <option value="2618" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2660" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ElegantWebApi/Controllers/DataListController.cs</url>
+          <line>58</line>
+          <properties documentPath="C:\Users\vladx\source\repos\ElegantWebApi\ElegantWebApi\Controllers\DataListController.cs" initialLine="58" containingFunctionPresentation="Method 'AppendValues'">
+            <startOffsets>
+              <option value="2269" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2270" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
