@@ -27,12 +27,15 @@ namespace ElegantWebApi.Application.Features.AppendValue
         public async Task<SingleDataModel> Handle(AppendValueCommand request, CancellationToken cancellationToken)
         {
             var result = await _validator.ValidateAsync(request, cancellationToken);
+
             await _dictionaryService
                 .AppendAsync(request.DataModel.Id.ToString(), request.DataModel.Value);
+
             var defaultExpirationTimeInMinutes =
                 Convert.ToInt32(_configuration.GetSection("DefaultExpirationTime")["DefaultExpirationTimeInMinutes"]);
+
             var defaultExpirationDateTime = DateTime.Now.AddMinutes(defaultExpirationTimeInMinutes);
-            
+
             await _expirationDataService
                 .UpdateExpirationTimeAsync(request.DataModel.Id.ToString(), defaultExpirationDateTime);
 

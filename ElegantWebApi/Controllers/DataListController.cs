@@ -25,6 +25,8 @@ namespace ElegantWebApi.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<object>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetDataListFromIdAsync([AsParameters] string id)
         {
             var result = await _mediator.Send(new GetDataListCommand(id));
@@ -37,6 +39,8 @@ namespace ElegantWebApi.Api.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DataListModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddKeyValuePair([FromBody] DataListModel value)
         {
             var result = await _mediator.Send(new AddDataListCommand(value));
@@ -49,10 +53,12 @@ namespace ElegantWebApi.Api.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SingleDataModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AppendValues([FromBody] SingleDataModel value)
         {
-            await _mediator.Send(new AppendValueCommand(value));
-            return Ok(value);
+            var result = await _mediator.Send(new AppendValueCommand(value));
+            return Ok(result);
         }
         
         /// <summary> 
@@ -61,6 +67,8 @@ namespace ElegantWebApi.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DataListModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteKeyValuePairAsync([AsParameters] string id)
         {
             var result = await _mediator.Send(new DeleteRecordListCommand(id));
