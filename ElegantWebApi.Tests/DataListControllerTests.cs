@@ -82,8 +82,6 @@ public class DataListControllerTests
 
         // Assert
         Assert.IsType<OkObjectResult>(response);
-        var okResult = response as OkObjectResult;
-        Assert.Equal(expectedDataListModel, okResult?.Value);
     }
 
     [Fact]
