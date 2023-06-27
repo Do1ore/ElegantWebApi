@@ -1,6 +1,5 @@
 using ElegantWebApi.Infrastructure.Contracts;
 using ElegantWebApi.Infrastructure.Services;
-using Moq;
 
 namespace ElegantWebApi.Tests;
 
@@ -16,6 +15,7 @@ public class ConcurrentDictionaryServiceTest
     [Fact]
     public void Create_ReturnsCompletedTask()
     {
+        
         //Arrange
         var id = "f21c4da1-73b4-41f9-b34b-0aa37143bf6c";
         var listToAdd = new List<object> { "value23", 1345 };
