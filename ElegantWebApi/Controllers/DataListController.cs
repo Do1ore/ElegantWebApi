@@ -3,6 +3,7 @@ using ElegantWebApi.Application.Features.AppendValue;
 using ElegantWebApi.Application.Features.DeleteDataList;
 using ElegantWebApi.Application.Features.GetDataList;
 using ElegantWebApi.Domain.Entities;
+using ElegantWebApi.Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace ElegantWebApi.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public class DataListController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -60,7 +62,7 @@ namespace ElegantWebApi.Api.Controllers
             var result = await _mediator.Send(new AppendValueCommand(value));
             return Ok(result);
         }
-        
+
         /// <summary> 
         /// Remove a dictionary by id
         /// </summary>

@@ -46,12 +46,27 @@ namespace ElegantWebApi.Api.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ValueListApi", Version = "v1" });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile );
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
                 c.IncludeXmlComments(xmlPath);
             });
-         
+
             return services;
         }
+
+        public static IServiceCollection ConfigureCORS(this IServiceCollection services)
+        {
+            services.AddCors(a => a.AddPolicy("allowAll", prop =>
+            {
+                prop.AllowAnyHeader();
+                prop.AllowAnyMethod();
+                prop.AllowAnyOrigin();
+
+            })); 
+
+            return services;
+        }
+
+
     }
 }

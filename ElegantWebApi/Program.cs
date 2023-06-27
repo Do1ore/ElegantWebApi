@@ -1,4 +1,6 @@
 using ElegantWebApi.Api.Extensions;
+using ElegantWebApi.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,9 @@ builder.Services.SetupValidationForCommands();
 builder.Services.SetupCustomHostedService();
 builder.Services.SetupDictionaryAndDictionaryExpirationService();
 builder.Services.ConfigureSwaggerDoc();
+builder.Services.ConfigureCORS();
+//Configure api key auth
+builder.Services.AddScoped<ApiKeyAuthFilter>();
 
 var app = builder.Build();
 
@@ -27,6 +32,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "ValueListApi");
     });
 }
+app.UseCors("allowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
