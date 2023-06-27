@@ -1,4 +1,3 @@
-
 using ElegantWebApi.Application.Features.AddDataList;
 using ElegantWebApi.Application.Features.DeleteDataList;
 using ElegantWebApi.Application.Features.GetDataList;
@@ -9,11 +8,11 @@ using Moq;
 
 namespace ElegantWebApi.Tests;
 
-public class DataListControllerTests
+public class DataListControllerIntegrationTests
 {
     private readonly Mock<IMediator> _mediatorMock;
 
-    public DataListControllerTests()
+    public DataListControllerIntegrationTests()
     {
         _mediatorMock = new Mock<IMediator>();
     }
@@ -26,7 +25,8 @@ public class DataListControllerTests
 
         var expectedResult = new List<object> { "value", "value1" };
 
-        _mediatorMock.Setup(x => x.Send(It.IsAny<GetDataListCommand>(), CancellationToken.None))
+        _mediatorMock
+            .Setup(x => x.Send(It.IsAny<GetDataListCommand>(), CancellationToken.None))
             .ReturnsAsync(expectedResult);
         var controller = new DataListController(_mediatorMock.Object);
 
